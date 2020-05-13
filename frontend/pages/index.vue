@@ -1,39 +1,31 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        frontend
-      </h1>
-      <h2 class="subtitle">
-        todo-list app frontend with Nuxt.js
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
-  </div>
+  <v-layout>
+    <v-flex>
+      {{ todos.message }}
+      <!-- <v-list>
+        <v-list-tile v-for="example in examples" :key="example.id" :class="example.colour">
+          <v-list-tile-content>{{ example.name }}</v-list-tile-content>
+        </v-list-tile>
+      </v-list> -->
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
 export default {
-  components: {
-    Logo
+  middleware: ['auth'],
+  data () {
+    return {
+      todos: { }
+    }
+  },
+  mounted () {
+    this.updateTodoList()
+  },
+  methods: {
+    async updateTodoList () {
+      this.todos = await this.$axios.$get('todos')
+    }
   }
 }
 </script>
