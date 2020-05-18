@@ -20,7 +20,7 @@ export default {
     '~/plugins/vuex-persist.client.js'
   ],
   buildModules: [
-    '@nuxtjs/eslint-module',
+    // '@nuxtjs/eslint-module',
   ],
   modules: [
     '@nuxtjs/axios',
@@ -46,7 +46,7 @@ export default {
       }
     },
     redirect: {
-      user: '/todos'
+      user: '/tasks'
     },
     resetOnError: true
   },

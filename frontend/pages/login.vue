@@ -1,7 +1,7 @@
 <template>
-  <v-layout>
-    <v-flex>
-      <v-card v-if="isLoggedIn()">
+  <v-layout align-center justify-center>
+    <v-flex xs12 sm8 md4>
+      <v-card v-if="isLoggedIn()" class="elevation-12">
         <v-alert type="error" :value="error">
           {{ error }}
         </v-alert>
@@ -14,17 +14,29 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-      <v-card v-else>
+      <v-card v-else class="elevation-12">
+        <v-toolbar dark color="primary">
+          <v-toolbar-title>Login form</v-toolbar-title>
+          <v-spacer />
+        </v-toolbar>
         <v-alert type="error" :value="error">
           {{ error }}
         </v-alert>
         <v-card-text>
           <v-form>
-            <v-text-field v-model="email" label="Email" />
-            <v-text-field v-model="password" label="Password" type="password" />
+            <v-text-field v-model="email" prepend-icon="email" name="email" label="email" type="text" />
+            <v-text-field
+              id="password"
+              v-model="password"
+              prepend-icon="lock"
+              name="password"
+              label="Password"
+              type="password"
+            />
           </v-form>
           <v-card-actions>
-            <v-btn @click="login">
+            <v-spacer />
+            <v-btn color="primary" @click="login">
               Log in
             </v-btn>
           </v-card-actions>
@@ -41,8 +53,8 @@ export default {
   mixins: [loginMixin],
   data () {
     return {
-      email: '',
-      password: '',
+      email: 'tung@yopmail.com',
+      password: '123123123',
       error: null
     }
   },
