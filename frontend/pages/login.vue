@@ -1,20 +1,7 @@
 <template>
   <v-layout align-center justify-center>
     <v-flex xs12 sm8 md4>
-      <v-card v-if="isLoggedIn()" class="elevation-12">
-        <v-alert type="error" :value="error">
-          {{ error }}
-        </v-alert>
-        <v-card-text>
-          Logged in as {{ $auth.$state.user.email }}
-        </v-card-text>
-        <v-card-actions>
-          <v-btn @click="logout">
-            Log out
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-      <v-card v-else class="elevation-12">
+      <v-card class="elevation-12">
         <v-toolbar dark color="primary">
           <v-toolbar-title>Login form</v-toolbar-title>
           <v-spacer />
@@ -47,10 +34,7 @@
 </template>
 
 <script>
-import loginMixin from '~/mixins/global'
-
 export default {
-  mixins: [loginMixin],
   data () {
     return {
       email: 'tung@yopmail.com',
@@ -69,9 +53,6 @@ export default {
         this.$auth.setUser(response.data.user)
         this.$auth.setToken('local', response.data.auth_token)
       }).catch((e) => { this.error = e + '' })
-    },
-    logout () {
-      this.$auth.logout().catch((e) => { this.error = e + '' })
     }
   }
 }

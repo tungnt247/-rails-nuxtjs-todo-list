@@ -16,8 +16,8 @@ export default {
   css: [
   ],
   plugins: [
-    '~/plugins/axios',
-    '~/plugins/vuex-persist.client.js'
+    { src: '~/plugins/axios' },
+    { src: '~/plugins/localStorage.js', ssr: false }
   ],
   buildModules: [
     // '@nuxtjs/eslint-module',
@@ -39,19 +39,22 @@ export default {
         endpoints: {
           login: { url: '/login', method: 'post', propertyName: 'token' },
           logout: { url: '/logout', method: 'delete' },
-          user:   { url: '/user' }
+          user: false
         },
         tokenRequired: true,
         tokenType: 'Bearer'
       }
     },
     redirect: {
-      user: '/tasks'
+      home: '/'
     },
     resetOnError: true
   },
   build: {
     extend (config, ctx) {
     }
+  },
+  router: {
+    middleware: ['auth']
   }
 }

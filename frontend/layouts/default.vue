@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import loginMixin from '~/mixins/global'
+import { loginMixin } from '~/mixins/global'
 import backgroundUrl from '~/assets/bg.jpeg'
 
 export default {
@@ -36,8 +36,8 @@ export default {
     }
   },
   methods: {
-    logout () {
-      this.$auth.logout()
+    async logout () {
+      await this.$auth.logout()
       this.$router.push('/login')
     }
   }

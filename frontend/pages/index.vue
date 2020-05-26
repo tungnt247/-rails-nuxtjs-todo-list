@@ -7,7 +7,6 @@ import TaskCard from '~/components/TaskCard'
 
 export default {
   components: { TaskCard },
-  middleware: ['auth'],
   data () {
     return {
       tasks: []
