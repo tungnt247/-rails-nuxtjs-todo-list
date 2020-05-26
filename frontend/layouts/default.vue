@@ -15,7 +15,8 @@
         </v-btn>
       </v-toolbar>
       <v-content>
-        <v-container fluid>
+        <div :style="{ backgroundImage: `url(${backgroundUrl})` }" class="body-image" />
+        <v-container fluid fill-height class="body-content" >
           <nuxt />
         </v-container>
       </v-content>
@@ -24,13 +25,19 @@
 </template>
 
 <script>
-import loginMixin from '~/mixins/global'
+import { loginMixin } from '~/mixins/global'
+import backgroundUrl from '~/assets/bg.jpeg'
 
 export default {
   mixins: [loginMixin],
+  data() {
+    return {
+      backgroundUrl
+    }
+  },
   methods: {
-    logout () {
-      this.$auth.logout()
+    async logout () {
+      await this.$auth.logout()
       this.$router.push('/login')
     }
   }
@@ -84,5 +91,26 @@ html {
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
+}
+
+.body-image {
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.body-content {
+  background-color: rgba(0,0,0, 0.4);
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  padding: 20px;
+  text-align: center;
 }
 </style>

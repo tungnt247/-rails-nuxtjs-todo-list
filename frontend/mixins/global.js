@@ -1,5 +1,7 @@
-export default {
+export const loginMixin = {
   methods: {
-    isLoggedIn () { return this.$auth.$state.loggedIn }
+    isLoggedIn () {
+      return this.$auth.$state.loggedIn
+    }
   }
 }
