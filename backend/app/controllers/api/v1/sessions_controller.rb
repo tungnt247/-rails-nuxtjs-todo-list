@@ -1,4 +1,5 @@
 class Api::V1::SessionsController < ApplicationController
+  before_action :authenticate_request!, only: %i[show]
   respond_to :json
 
   def create
@@ -10,16 +11,16 @@ class Api::V1::SessionsController < ApplicationController
     end
   end
 
-  def destroy; end
+  def show
+    render json: { user: { id: current_user.id, email: current_user.email } }
+  end
 
   private
 
   def payload(user)
     return nil unless user
     {
-      auth_token: JsonWebToken.encode({ user_id: user.id }),
-      exp: TOKEN_EXPIRE_TIME,
-      user: { id: user.id, email: user.email }
+      token: JsonWebToken.encode({ user_id: user.id, exp: TOKEN_EXPIRE_TIME } )
     }
   end
 end

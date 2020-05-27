@@ -38,14 +38,16 @@ export default {
       local: {
         endpoints: {
           login: { url: '/login', method: 'post', propertyName: 'token' },
-          logout: { url: '/logout', method: 'delete' },
-          user: false
+          user: { url: '/user' },
+          logout: false
         },
         tokenRequired: true,
         tokenType: 'Bearer'
       }
     },
     redirect: {
+      login: '/login',
+      logout: '/login',
       home: '/'
     },
     resetOnError: true

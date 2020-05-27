@@ -49,9 +49,6 @@ export default {
           email: this.email,
           password: this.password
         }
-      }).then((response) => {
-        this.$auth.setUser(response.data.user)
-        this.$auth.setToken('local', response.data.auth_token)
       }).catch((e) => { this.error = e + '' })
     }
   }
