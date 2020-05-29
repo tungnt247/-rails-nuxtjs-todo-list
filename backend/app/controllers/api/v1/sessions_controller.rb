@@ -15,12 +15,27 @@ class Api::V1::SessionsController < ApplicationController
     render json: { user: { id: current_user.id, email: current_user.email } }
   end
 
+  def facebook_login
+    binding.pry
+  end
+
+  def facebook_callback
+    
+  end
+
   private
 
   def payload(user)
     return nil unless user
     {
       token: JsonWebToken.encode({ user_id: user.id, exp: TOKEN_EXPIRE_TIME } )
+    }
+  end
+
+  def facebook_login_response(user)
+    {
+      token: JsonWebToken.encode({ user_id: user.id, exp: TOKEN_EXPIRE_TIME } ),
+      user: {email: user.email, id: user.id}
     }
   end
 end

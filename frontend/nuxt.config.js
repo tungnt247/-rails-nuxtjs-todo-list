@@ -43,14 +43,22 @@ export default {
         },
         tokenRequired: true,
         tokenType: 'Bearer'
+      },
+      facebook: {
+        client_id: '251620079257199',
+        userinfo_endpoint: false,
+        scope: ['public_profile', 'email'],
+        redirect_uri: 'http://localhost:8000/'
       }
     },
     redirect: {
       login: '/login',
       logout: '/login',
-      home: '/'
+      home: '/',
+      callback: '/login'
     },
-    resetOnError: true
+    resetOnError: true,
+    plugins: ['~/plugins/auth']
   },
   build: {
     extend (config, ctx) {

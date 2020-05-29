@@ -22,6 +22,9 @@
             />
           </v-form>
           <v-card-actions>
+            <v-btn color="infor" @click="facebook">
+              Log in with facebook
+            </v-btn>
             <v-spacer />
             <v-btn color="primary" @click="login">
               Log in
@@ -50,6 +53,9 @@ export default {
           password: this.password
         }
       }).catch((e) => { this.error = e + '' })
+    },
+    async facebook() {
+      await this.$auth.loginWith('facebook')
     }
   }
 }
