@@ -35,7 +35,8 @@ export default {
   },
   auth: {
     strategies: {
-      local: {
+      local1: {
+        _scheme: 'local',
         endpoints: {
           login: { url: '/login', method: 'post', propertyName: 'token' },
           user: { url: '/user' },
@@ -44,11 +45,15 @@ export default {
         tokenRequired: true,
         tokenType: 'Bearer'
       },
-      facebook: {
-        client_id: '251620079257199',
-        userinfo_endpoint: false,
-        scope: ['public_profile', 'email'],
-        redirect_uri: 'http://localhost:8000/'
+      local2: {
+        _scheme: 'local',
+        endpoints: {
+          login: { url: '/facebook_login', method: 'post', propertyName: 'token' },
+          user: { url: '/user' },
+          logout: false
+        },
+        tokenRequired: true,
+        tokenType: 'Bearer'
       }
     },
     redirect: {
@@ -57,8 +62,7 @@ export default {
       home: '/',
       callback: '/login'
     },
-    resetOnError: true,
-    plugins: ['~/plugins/auth']
+    resetOnError: true
   },
   build: {
     extend (config, ctx) {
