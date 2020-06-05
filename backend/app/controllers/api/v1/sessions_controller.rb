@@ -24,7 +24,7 @@ class Api::V1::SessionsController < ApplicationController
   def payload(user)
     return nil unless user
     {
-      token: JsonWebToken.encode({ user_id: user.id, exp: TOKEN_EXPIRE_TIME } )
+      token: JsonWebToken.encode({ user_id: user.id, exp: TOKEN_EXPIRE_TIME, jti: Devise.friendly_token(8) } )
     }
   end
 end
