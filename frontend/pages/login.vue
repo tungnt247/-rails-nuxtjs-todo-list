@@ -22,6 +22,9 @@
             />
           </v-form>
           <v-card-actions>
+            <v-btn href="https://www.facebook.com/v7.0/dialog/oauth?client_id=251620079257199&redirect_uri=http://localhost:8000/login&state={loggedIn=true}&scope=public_profile,email">
+              Log in with facebook
+            </v-btn>
             <v-spacer />
             <v-btn color="primary" @click="login">
               Log in
@@ -42,14 +45,31 @@ export default {
       error: null
     }
   },
+  mounted () {
+    if (!this.$route.query.code) {
+      return
+    } else {
+      this.loginWithFacebook()
+    }
+  },
   methods: {
     login () {
-      this.$auth.loginWith('local', {
+      this.$auth.loginWith('local1', {
         data: {
           email: this.email,
           password: this.password
         }
       }).catch((e) => { this.error = e + '' })
+    },
+    loginWithFacebook () {
+      const code = this.$route.query.code
+
+      this.$auth.loginWith('local2', {
+        data: {
+          facebook_code: code
+        }
+      })
+      this.$router.replace('/')
     }
   }
 }

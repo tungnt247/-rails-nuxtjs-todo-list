@@ -35,9 +35,20 @@ export default {
   },
   auth: {
     strategies: {
-      local: {
+      local1: {
+        _scheme: 'local',
         endpoints: {
           login: { url: '/login', method: 'post', propertyName: 'token' },
+          user: { url: '/user' },
+          logout: false
+        },
+        tokenRequired: true,
+        tokenType: 'Bearer'
+      },
+      local2: {
+        _scheme: 'local',
+        endpoints: {
+          login: { url: '/facebook_login', method: 'post', propertyName: 'token' },
           user: { url: '/user' },
           logout: false
         },
@@ -48,7 +59,8 @@ export default {
     redirect: {
       login: '/login',
       logout: '/login',
-      home: '/'
+      home: '/',
+      callback: '/login'
     },
     resetOnError: true
   },

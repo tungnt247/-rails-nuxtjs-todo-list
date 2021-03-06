@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { loginMixin } from '~/mixins/global'
+import loginMixin from '~/mixins/loginMixin'
 import backgroundUrl from '~/assets/bg.jpeg'
 
 export default {

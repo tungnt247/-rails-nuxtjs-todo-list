@@ -12,7 +12,11 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   def show
-    render json: { user: { id: current_user.id, email: current_user.email } }
+    render json: { email: current_user.email, id: current_user.id }
+  end
+
+  def facebook_login
+    render json: FacebookAuthenService.new(params[:facebook_code]).call
   end
 
   private
